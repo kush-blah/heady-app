@@ -1,14 +1,21 @@
 package com.example.kushsingh.heady_app.data.local
 
 open class SharedPrefHelper {
-    @Volatile
-    private lateinit var INSTANCE: SharedPrefHelper
 
-    companion object {
-        @Synchronized
-        fun getInstance(): SharedPrefHelper {
-            return SharedPrefHelper()
+    object SharePrefHepler {
+        @Volatile
+        private var INSTANCE: SharedPrefHelper? = null
+        fun getInstance() : SharedPrefHelper{
+            if(INSTANCE == null){
+            synchronized(SharedPrefHelper::class.java){
+                if(INSTANCE==null)
+                    INSTANCE = SharedPrefHelper()
+            }
+            }
+            return INSTANCE!!
         }
     }
+
+
 }
 
