@@ -1,5 +1,8 @@
 package com.example.kushsingh.heady_app.Utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import org.jetbrains.anko.connectivityManager
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
@@ -18,6 +21,19 @@ class Utility {
             }
             return list
 
+        }
+
+        fun checkNotNull(o: Any?, s: String) {
+            if(o == null){
+                throw IllegalStateException()
+            }
+        }
+
+        fun isNetworkConnected(context: Context): Boolean {
+            if (context == null)
+                return false
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            return cm.activeNetworkInfo != null
         }
     }
 
